@@ -4,9 +4,9 @@ set -euo pipefail
 
 banner() {
   echo
-  echo "========================================="
-  echo "   UFUKDEGEN Tarafından Hazırlanmıştır   "
-  echo "========================================="
+  echo "========================================"
+  echo "   UFUKDEGEN Tarafından Hazırlanmıştır  "
+  echo "========================================"
   echo
 }
 
@@ -18,14 +18,11 @@ require_root() {
 }
 
 confirm_debian() {
-  if ! command -v apt >/dev/null 2>&1; then
-    echo "[HATA] Bu script Debian/Ubuntu (apt) tabanlı sistemler içindir."
-    exit 1
-  fi
+  command -v apt >/dev/null 2>&1 || { echo "[HATA] Bu script Debian/Ubuntu içindir."; exit 1; }
 }
 
 install_packages() {
-  echo "[INFO] Paket listesi güncelleniyor ve yükseltiliyor..."
+  echo "[INFO] Paket listesi güncelleniyor..."
   DEBIAN_FRONTEND=noninteractive apt update -y && apt upgrade -y
   echo "[INFO] Gerekli paketler kuruluyor..."
   DEBIAN_FRONTEND=noninteractive apt install -y \
@@ -37,7 +34,6 @@ install_packages() {
 
 ensure_conda() {
   if command -v conda >/dev/null 2>&1; then
-    echo "[INFO] Conda bulundu."
     eval "$(conda shell.bash hook)" || true
     return
   fi
@@ -49,7 +45,6 @@ ensure_conda() {
   rm -f ${MINICONDA}
   /opt/miniconda/bin/conda init bash >/dev/null 2>&1 || true
   eval "$(/opt/miniconda/bin/conda shell.bash hook)"
-  echo "[INFO] Miniconda kuruldu."
 }
 
 clone_repo() {
@@ -64,12 +59,8 @@ clone_repo() {
 }
 
 create_env_and_install() {
-  if ! command -v conda >/dev/null 2>&1; then
-    eval "$(/opt/miniconda/bin/conda shell.bash hook)"
-  fi
-  if conda env list | grep -qE '^\s*node0\s'; then
-    echo "[INFO] 'node0' conda ortamı mevcut."
-  else
+  command -v conda >/dev/null 2>&1 || eval "$(/opt/miniconda/bin/conda shell.bash hook)"
+  if ! conda env list | grep -qE '^\s*node0\s'; then
     echo "[INFO] 'node0' ortamı oluşturuluyor (python=3.11)..."
     conda create -y -n node0 python=3.11
   fi
@@ -81,30 +72,17 @@ create_env_and_install() {
 get_inputs() {
   echo
   echo "=== Başlangıç Scriptini Oluşturalım ==="
-  echo " - HF Token (Hugging Face): https://huggingface.co/settings/tokens/new?tokenType=write"
-  echo " - Email adresiniz"
-  echo " - Announce Port (A_Port) → Vast 'public' port (ör: 25000 gibi)"
-  echo
-
-  read -rp "HF Token: " HF_TOKEN
-  while [[ -z "${HF_TOKEN}" ]]; do read -rp "HF Token boş olamaz, tekrar girin: " HF_TOKEN; done
-
-  read -rp "Email: " EMAIL_ADDR
-  while [[ -z "${EMAIL_ADDR}" ]]; do read -rp "Email boş olamaz, tekrar girin: " EMAIL_ADDR; done
-
+  read -rp "HF Token: " HF_TOKEN;      while [[ -z "${HF_TOKEN}" ]];   do read -rp "HF Token boş olamaz: " HF_TOKEN; done
+  read -rp "Email: " EMAIL_ADDR;       while [[ -z "${EMAIL_ADDR}" ]]; do read -rp "Email boş olamaz: " EMAIL_ADDR; done
   read -rp "Announce Port (A_Port): " ANN_PORT
   while ! [[ "${ANN_PORT}" =~ ^[0-9]+$ ]]; do read -rp "Geçerli bir port girin (sayı): " ANN_PORT; done
-
   HOST_PORT=49200
   export HF_TOKEN EMAIL_ADDR ANN_PORT HOST_PORT
 }
 
 generate_start_script() {
   echo "[INFO] generate_script.py çalıştırılıyor, 'n' cevabı otomatik gönderilecek..."
-  if ! command -v conda >/dev/null 2>&1; then
-    eval "$(/opt/miniconda/bin/conda shell.bash hook)"
-  fi
-  # Interaktif shell + conda activate; stdin pipe ile 'n'
+  command -v conda >/dev/null 2>&1 || eval "$(/opt/miniconda/bin/conda shell.bash hook)"
   bash -lc "
     source /opt/miniconda/etc/profile.d/conda.sh || true
     conda activate node0
@@ -127,15 +105,41 @@ set -euo pipefail
 mkdir -p logs
 trap 'echo "[INFO] Ctrl-C algılandı ama yoksayıldı. Çıkmak için: Ctrl-A, D";' INT
 
-echo "[INFO] Gözetmen döngüsü başlıyor. Loglar hem ekranda hem logs/run.out içinde."
-while true; do
+# Node'u başlatır, ardından logları canlı olarak ekrana (ve dosyaya) akıtır.
+start_and_tail() {
   echo "----- $(date) | start_server.sh başlatılıyor -----" | tee -a logs/run.out
+
+  # start_server.sh bazı kurulumlarda arka plana atıp dosyaya loglayabilir.
+  # Bu yüzden çıktıyı doğrudan ekrana alamayabiliriz; onun yerine dosyaları tail edeceğiz.
   if command -v conda >/dev/null 2>&1; then
-    conda run -n node0 bash -lc "./start_server.sh" 2>&1 | tee -a logs/run.out
+    conda run -n node0 bash -lc "./start_server.sh" || true &
   else
-    /opt/miniconda/bin/conda run -n node0 bash -lc "./start_server.sh" 2>&1 | tee -a logs/run.out
+    /opt/miniconda/bin/conda run -n node0 bash -lc "./start_server.sh" || true &
   fi
-  echo "[WARN] start_server.sh sonlandı. 10 sn sonra yeniden denenecek..." | tee -a logs/run.out
+
+  # Biraz nefes ver, log dosyaları oluşsun
+  sleep 3
+  touch logs/run.out 2>/dev/null || true
+  touch logs/server.log 2>/dev/null || true
+
+  # Hem run.out hem server.log'u canlı izle
+  tail -n +1 -F logs/run.out logs/server.log &
+  TAILPID=$!
+
+  # Ana süreç çalıştığı sürece bekle
+  # node0 süreçlerini izlemek için basit bir döngü:
+  while pgrep -f 'python.*node0|hivemind|averager|server.runtime' >/dev/null 2>&1; do
+    sleep 5
+  done
+
+  # Süreç sonlandıysa tail'i kapat
+  kill "${TAILPID}" >/dev/null 2>&1 || true
+}
+
+echo "[INFO] Gözetmen döngüsü başlıyor. Loglar ekranda ve logs/run.out içinde."
+while true; do
+  start_and_tail
+  echo "[WARN] Node sonlandı. 10 sn sonra yeniden denenecek..." | tee -a logs/run.out
   sleep 10
 done
 BASH
@@ -150,11 +154,11 @@ start_in_screen() {
 
 print_help() {
   echo
-  echo "==============================================================="
+  echo "=================================================================="
   echo " Kurulum tamamlandı. Komutlar:"
   echo "  • Screen'e gir (canlı logları görmek için):  screen -r pluralis"
   echo "  • Ekrandan ayrıl:                            Ctrl-A, sonra D"
-  echo "==============================================================="
+  echo "=================================================================="
   echo
 }
 
