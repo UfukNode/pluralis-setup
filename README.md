@@ -25,6 +25,8 @@ Hiç bilmeyen biri bile rahatlıkla kurabilir.
 * Sol menüden **Billing → Add Credit** kısmına gir.
 * Yükleyeceğin miktarı seç ve **Stripe** ile bakiye yükle.
 
+![1 (4)](https://github.com/user-attachments/assets/046d1acc-d595-4977-aa20-41ec2aedccca)
+
 ---
 
 ## 2- Huggingface Kayıt – Token Oluşturma:
@@ -58,6 +60,8 @@ Hiç bilmeyen biri bile rahatlıkla kurabilir.
 * “+” butonuna bas, ardından **Save & Use** seç.
 * İnterneti güçlü (500Mbps+) bir sunucu seç.
 
+![1 (5)](https://github.com/user-attachments/assets/8af108de-6fe5-4203-84ee-6c1604530678)
+
 ---
 
 ## 5- Terminale Giriş:
@@ -80,6 +84,8 @@ wget https://raw.githubusercontent.com/UfukNode/pluralis-setup/refs/heads/main/s
 chmod 777 ./script.sh
 ./script.sh
 ```
+
+<img width="1124" height="335" alt="Ekran Resmi 2025-09-20 17 00 55" src="https://github.com/user-attachments/assets/9f5f0eee-8193-4643-b06a-05663f3384bf" />
 
 ---
 
