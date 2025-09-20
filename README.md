@@ -86,10 +86,14 @@ chmod 777 ./script.sh
 * Huggingface token’i girip Enter’a basın.
 * Mail adresinizi girip Enter’a basın.
 
-**Host / Port:**
+![Adsız tasarım (2)](https://github.com/user-attachments/assets/57e4e65d-d6fc-4cbf-af8d-8d1c6e1f6f6a)
+
+**Host / Port Nasıl Öğrenilir:**
 
 * Vast.ai → **Instances** bölümüne girin.
 * Sunucunun üzerindeki **Verified** kısmının yanındaki IP’ye tıklayın ve kopyalayın.
+
+![1 (1)](https://github.com/user-attachments/assets/1ec9b808-7390-4adc-aeca-277fe07638b3)
 
 ---
 
@@ -103,6 +107,8 @@ screen -r pluralis
 
 * Eğer loglarda saniye sayacı görünüyorsa kuyruktasınız.
 * Biraz bekleyin, kısa süre içinde node’unuz aktifleşir ve dashboard’da görünür.
+
+
 
 ---
 
