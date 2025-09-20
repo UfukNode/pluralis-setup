@@ -113,6 +113,8 @@ screen -r pluralis
 * Huggingface kullanıcı adınızı aratın.
 * İsminiz çıkıyorsa node başlamıştır.
 
+<img width="1257" height="348" alt="Ekran Resmi 2025-09-20 16 26 26" src="https://github.com/user-attachments/assets/6a690ca5-9d53-4cef-bf37-8f791bd90f05" />
+
 ---
 
 ## 10- Gerekli Komutlar:
