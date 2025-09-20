@@ -81,7 +81,7 @@ get_inputs() {
   printf "${CYAN}[INFO]${NC} Başlangıç bilgilerini giriniz:\n"
   printf "  HF Token: "; read -r HF_TOKEN; while [[ -z "${HF_TOKEN}" ]]; do printf "${YELLOW}[WARN] Boş olamaz. HF Token: ${NC}"; read -r HF_TOKEN; done
   printf "  Email: "; read -r EMAIL_ADDR; while [[ -z "${EMAIL_ADDR}" ]]; do printf "${YELLOW}[WARN] Boş olamaz. Email: ${NC}"; read -r EMAIL_ADDR; done
-  EMAIL_ADDR="$(printf '%s' "$EMAIL_ADDR" | tr -cd '[:print:]')"   # gizli/bozuk char temizle
+  EMAIL_ADDR="$(printf '%s' "$EMAIL_ADDR" | tr -cd '[:print:]')"   # görünmeyen char temizle
   printf "  Announce Port (A_Port) [örn: 25xxx]: "; read -r ANN_PORT
   while ! [[ "${ANN_PORT}" =~ ^[0-9]+$ ]]; do printf "${YELLOW}[WARN] Sayı giriniz. A_Port: ${NC}"; read -r ANN_PORT; done
   HOST_PORT=49200
@@ -94,7 +94,6 @@ generate_start_script() {
   conda_hook >/dev/null
   bash -lc "
     export PYTHONUTF8=1 LC_ALL=C.UTF-8 LANG=C.UTF-8
-    source /opt/miniconda/etc/profile.d/conda.sh 2>/dev/null || true
     if command -v conda >/dev/null 2>&1; then eval \"\$(conda shell.bash hook)\"; fi
     conda activate node0
     printf 'n\n' | python3 generate_script.py \
@@ -109,9 +108,9 @@ generate_start_script() {
 
 create_wrapper() {
   cat > script.sh <<'EOS'
-#!/usr/bin/env bash
-set -euo pipefail
+set -u
 cd "$(dirname "$0")"
+trap 'exit 0' INT
 export PYTHONUTF8=1 LC_ALL=C.UTF-8 LANG=C.UTF-8
 if command -v conda >/dev/null 2>&1; then
   eval "$(conda shell.bash hook)"
@@ -119,7 +118,8 @@ elif [[ -x /opt/miniconda/bin/conda ]]; then
   eval "$(/opt/miniconda/bin/conda shell.bash hook)"
 fi
 conda activate node0
-exec ./start_server.sh
+./start_server.sh
+while :; do sleep 3600; done
 EOS
   chmod +x script.sh
   say "$GREEN" "[OK] script.sh oluşturuldu."
@@ -134,8 +134,8 @@ start_in_screen() {
 tips() {
   printf "\n${BOLD}Kontrol Komutları:${NC}\n"
   printf "  • Screen'e bağlan:  ${CYAN}screen -r pluralis${NC}\n"
-  printf "  • Çık (kapatmadan): ${CYAN}Ctrl-A, sonra D${NC}\n"
-  printf "  • Durdur:           ${CYAN}screen -S pluralis -X quit${NC}\n\n"
+  printf "  • Ekrandan ayrıl:   ${CYAN}Ctrl-A, sonra D${NC}\n"
+  printf "  • Kapatmak istersen: ${CYAN}screen -S pluralis -X quit${NC}\n\n"
 }
 
 main() {
