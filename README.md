@@ -13,7 +13,7 @@ Hiç bilmeyen biri bile rahatlıkla kurabilir.
 | --------------- | ------------------------------ |
 | RAM             | Minimum 16 GB                  |
 | CPU             | 6–8 Çekirdek                   |
-| GPU             | 16GB+ VRAM (RTX 3090 önerilir) |
+| GPU             | 16GB+ VRAM (RTX 3090 - A4000 önerilir) |
 | Disk            | Minimum 120GB SSD              |
 
 ---
@@ -33,6 +33,7 @@ Hiç bilmeyen biri bile rahatlıkla kurabilir.
 * **Settings → Access Token** bölümüne gir
 * **Create New Token** butonuna tıkla
 * **Write** seç, isim ver ve oluştur
+* Oluşturduğun bir yere tokeni kaydet.
 
 ---
 
@@ -73,8 +74,6 @@ wget https://raw.githubusercontent.com/UfukNode/pluralis-setup/refs/heads/main/s
 chmod 777 ./script.sh
 ./script.sh
 ```
-
-⚠️ Hata alırsanız, bu adımı GitHub’dan kopyalayarak deneyin.
 
 ---
 
@@ -129,15 +128,6 @@ screen -r pluralis
 ```bash
 ./script.sh
 ```
-
----
-
-## 11- Private Key Kaydet:
-
-* Vast.ai → **Instances** bölümüne gir
-* Terminal ikonuna tıkla
-* Açılan pencerede **root** seç
-* **Node0** dosyasını seçip private key’i indir
 
 ---
 
