@@ -47,6 +47,8 @@ Hiç bilmeyen biri bile rahatlıkla kurabilir.
 * **Planet Earth** kısmını **North America** seç.
 * **Auto Short** kısmını **Price Inc** yap.
 
+![1 (3)](https://github.com/user-attachments/assets/b51612e5-fb70-4d61-a2ac-0e272828b447)
+
 ---
 
 ## 4- 49200 Port Ekleme ve Sunucu Seçimi:
