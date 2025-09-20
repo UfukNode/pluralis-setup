@@ -108,7 +108,7 @@ screen -r pluralis
 * Eğer loglarda saniye sayacı görünüyorsa kuyruktasınız.
 * Biraz bekleyin, kısa süre içinde node’unuz aktifleşir ve dashboard’da görünür.
 
-
+![1 (2)](https://github.com/user-attachments/assets/1a4d375d-6980-4b00-9023-86a0eebccf30)
 
 ---
 
