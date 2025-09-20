@@ -20,48 +20,48 @@ Hiç bilmeyen biri bile rahatlıkla kurabilir.
 
 ## 1- Vast.ai Kayıt – Bakiye Yükleme:
 
-* [https://cloud.vast.ai/?ref\_id=222215](https://cloud.vast.ai/?ref_id=222215) adresine git
-* Sağ üstten **Login** butonuna tıkla ve kayıt ol
-* Sol menüden **Billing → Add Credit** kısmına gir
-* Yükleyeceğin miktarı seç ve **Stripe** ile bakiye yükle
+* [https://cloud.vast.ai/?ref\_id=222215](https://cloud.vast.ai/?ref_id=222215) adresine git.
+* Sağ üstten **Login** butonuna tıkla ve kayıt ol.
+* Sol menüden **Billing → Add Credit** kısmına gir.
+* Yükleyeceğin miktarı seç ve **Stripe** ile bakiye yükle.
 
 ---
 
 ## 2- Huggingface Kayıt – Token Oluşturma:
 
-* [https://huggingface.co](https://huggingface.co) adresine git ve kayıt ol
-* **Settings → Access Token** bölümüne gir
-* **Create New Token** butonuna tıkla
-* **Write** seç, isim ver ve oluştur
+* [https://huggingface.co](https://huggingface.co) adresine git ve kayıt ol.
+* **Settings → Access Token** bölümüne gir.
+* **Create New Token** butonuna tıkla.
+* **Write** seç, isim ver ve oluştur.
 * Oluşturduğun bir yere tokeni kaydet.
 
 ---
 
 ## 3- Template ve Filtre Ayarları:
 
-* Soldan **Templates** kısmına tıkla
-* En üsttekini seç
-* GPU kısmını **RTX 3090** yap
-* **Planet Earth** kısmını **North America** seç
-* **Auto Short** kısmını **Price Inc** yap
+* Soldan **Templates** kısmına tıkla.
+* En üsttekini seç **NVIDIA CUDA** template'i seçin.
+* GPU kısmını **RTX 3090** ile *a4000* yap.
+* **Planet Earth** kısmını **North America** seç.
+* **Auto Short** kısmını **Price Inc** yap.
 
 ---
 
 ## 4- 49200 Port Ekleme ve Sunucu Seçimi:
 
-* “NVIDIA Cuda” altındaki kalem ikonuna tıkla
-* Port kısmına **49200** yaz
-* “+” butonuna bas, ardından **Save & Use** seç
-* İnterneti güçlü (500Mbps+) bir sunucu seç
+* “NVIDIA Cuda” altındaki kalem ikonuna tıkla.
+* Port kısmına **49200** yaz.
+* “+” butonuna bas, ardından **Save & Use** seç.
+* İnterneti güçlü (500Mbps+) bir sunucu seç.
 
 ---
 
 ## 5- Terminale Giriş:
 
-* Soldan **Instances** bölümüne git
-* Sunucunun sağındaki terminal ikonuna tıkla
-* **Open Jupyter Terminal** seç
-* Terminal açılması için sunucunun çalışıyor olması gerekir
+* Soldan **Instances** bölümüne git.
+* Sunucunun sağındaki terminal ikonuna tıkla.
+* **Open Jupyter Terminal** seç.
+* Terminal açılması için sunucunun çalışıyor olması gerekir.
 
 ---
 
@@ -81,13 +81,13 @@ chmod 777 ./script.sh
 
 **Huggingface / Mail:**
 
-* Huggingface token’i girip Enter’a basın
-* Mail adresinizi girip Enter’a basın
+* Huggingface token’i girip Enter’a basın.
+* Mail adresinizi girip Enter’a basın.
 
 **Host / Port:**
 
-* Vast.ai → **Instances** bölümüne girin
-* Sunucunun üzerindeki **Verified** kısmının yanındaki IP’ye tıklayın ve kopyalayın
+* Vast.ai → **Instances** bölümüne girin.
+* Sunucunun üzerindeki **Verified** kısmının yanındaki IP’ye tıklayın ve kopyalayın.
 
 ---
 
@@ -106,7 +106,7 @@ screen -r pluralis
 
 ## 9- Dashboard Kontrol:
 
-* Dashboard bağlantısına git
+* Dashboard bağlantısına git.
 * Aşağı inip **sıralama** kısmına gel.
 * Huggingface kullanıcı adınızı aratın.
 * İsminiz çıkıyorsa node başlamıştır.
