@@ -106,7 +106,7 @@ screen -r pluralis
 
 ## 9- Dashboard Kontrol:
 
-* Dashboard bağlantısına git.
+* https://dashboard.pluralis.ai/ dashboard bağlantısına git.
 * Aşağı inip **sıralama** kısmına gel.
 * Huggingface kullanıcı adınızı aratın.
 * İsminiz çıkıyorsa node başlamıştır.
