@@ -141,6 +141,24 @@ screen -r pluralis
 
 ---
 
+## Sık Sorulan Sorular
+
+### Private Key Kaydetmeli miyim?
+
+* Size verilen private key’i kaydetmenize gerek yok.
+* Tüm katkılarınız **HuggingFace hesabınıza** bağlıdır. Bu yüzden hesabınızı korumanız yeterlidir.
+
+### Node Girişleri Açık mı Kapalı mı Nasıl Anlarım?
+
+* Ekip, bakım veya güncellemeler sırasında girişleri kapatabiliyor.
+* Bu yüzden node çalışsa bile bazen dashboard’da görünmeyebilirsiniz.
+* Kontrol için [Pluralis Dashboard](https://dashboard.pluralis.ai/) sayfasına bakın.
+* Görselde süre görüyorsanız node çalışıyordur. **Paused** yazıyorsa çalışmıyordur.
+
+<img width="962" height="426" alt="Ekran Resmi 2025-09-20 16 48 31" src="https://github.com/user-attachments/assets/3e147af6-eda0-479f-890c-d24497fa8ff6" />
+
+---
+
 ### UfukDegen
 X: [https://x.com/UfukDegen](https://x.com/UfukDegen)
 
