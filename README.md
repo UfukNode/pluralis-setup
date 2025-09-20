@@ -65,6 +65,8 @@ Hiç bilmeyen biri bile rahatlıkla kurabilir.
 * **Open Jupyter Terminal** seç.
 * Terminal açılması için sunucunun çalışıyor olması gerekir.
 
+![Adsız tasarım (3)](https://github.com/user-attachments/assets/2336d8bb-c3d5-44c7-b5e8-88aa893d8066)
+
 ---
 
 ## 6- Node’u Başlat:
