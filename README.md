@@ -35,6 +35,8 @@ Hiç bilmeyen biri bile rahatlıkla kurabilir.
 * **Write** seç, isim ver ve oluştur.
 * Oluşturduğun bir yere tokeni kaydet.
 
+![1](https://github.com/user-attachments/assets/b1c8a4e2-c071-401c-886b-1086a7039f04)
+
 ---
 
 ## 3- Template ve Filtre Ayarları:
