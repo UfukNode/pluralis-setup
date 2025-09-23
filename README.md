@@ -95,6 +95,7 @@ chmod 777 ./script.sh
 
 * Huggingface token’i girip Enter’a basın.
 * Mail adresinizi girip Enter’a basın.
+* port kısmına üst resimdeki 49200ün karşılığı neyse onu yazın
 
 ![Adsız tasarım (2)](https://github.com/user-attachments/assets/57e4e65d-d6fc-4cbf-af8d-8d1c6e1f6f6a)
 
